@@ -1,7 +1,3 @@
-Certainly! Here’s a README file tailored for your Breast Cancer Classification project, styled similarly to the example you provided:
-
----
-
 # Breast Cancer Classification with Neural Network
 
 ## Overview
@@ -36,7 +32,7 @@ This project implements a Breast Cancer Classification system using a neural net
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/your-username/breast-cancer-classification.git
+    git clone https://github.com/Pahinithi/Breast-Cancer-Classification-with-Neural-Network-Deep-Learning
     cd breast-cancer-classification
     ```
 
@@ -122,8 +118,5 @@ This project is licensed under the MIT License.
 
 ## Contact
 
-For any questions or inquiries, please reach out to [your-email@example.com](mailto:your-email@example.com).
+For any questions or inquiries, please reach out to [nithilan32@gmail.com](mailto:nithilan32@gmail.com).
 
----
-
-Replace placeholders like `https://github.com/your-username/breast-cancer-classification.git` and `[your-email@example.com]` with your actual repository link and contact information. If you need any additional sections or details, let me know!
