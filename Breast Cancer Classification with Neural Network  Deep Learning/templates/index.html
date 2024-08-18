@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Classification</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #c345ce, #33b1ad);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #4a90e2;
+        }
+        .card {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            display: inline-block;
+            text-align: left;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #4a90e2;
+        }
+        .card label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+        .card input {
+            padding: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            width: calc(100% - 16px);
+            box-sizing: border-box;
+        }
+        button {
+            padding: 12px;
+            background-color: #4a90e2;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #357abd;
+        }
+        .prediction {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Breast Cancer Classification</h1>
+        <form method="POST" action="/predict">
+            <!-- First card with 6 fields -->
+            <div class="card">
+                <div class="card-title">Mean Values</div>
+                <label for="radius_mean">Radius Mean</label>
+                <input type="number" step="0.01" name="radius_mean" required>
+
+                <label for="texture_mean">Texture Mean</label>
+                <input type="number" step="0.01" name="texture_mean" required>
+
+                <label for="perimeter_mean">Perimeter Mean</label>
+                <input type="number" step="0.01" name="perimeter_mean" required>
+
+                <label for="area_mean">Area Mean</label>
+                <input type="number" step="0.01" name="area_mean" required>
+
+                <label for="smoothness_mean">Smoothness Mean</label>
+                <input type="number" step="0.01" name="smoothness_mean" required>
+
+                <label for="compactness_mean">Compactness Mean</label>
+                <input type="number" step="0.01" name="compactness_mean" required>
+            </div>
+
+            <!-- Second card with 6 fields -->
+            <div class="card">
+                <div class="card-title">SE Values</div>
+                <label for="concavity_mean">Concavity Mean</label>
+                <input type="number" step="0.01" name="concavity_mean" required>
+
+                <label for="concave_points_mean">Concave Points Mean</label>
+                <input type="number" step="0.01" name="concave_points_mean" required>
+
+                <label for="symmetry_mean">Symmetry Mean</label>
+                <input type="number" step="0.01" name="symmetry_mean" required>
+
+                <label for="fractal_dimension_mean">Fractal Dimension Mean</label>
+                <input type="number" step="0.01" name="fractal_dimension_mean" required>
+
+                <label for="radius_se">Radius SE</label>
+                <input type="number" step="0.01" name="radius_se" required>
+
+                <label for="texture_se">Texture SE</label>
+                <input type="number" step="0.01" name="texture_se" required>
+            </div>
+
+            <!-- Third card with 6 fields -->
+            <div class="card">
+                <div class="card-title">SE Values (Continued)</div>
+                <label for="perimeter_se">Perimeter SE</label>
+                <input type="number" step="0.01" name="perimeter_se" required>
+
+                <label for="area_se">Area SE</label>
+                <input type="number" step="0.01" name="area_se" required>
+
+                <label for="smoothness_se">Smoothness SE</label>
+                <input type="number" step="0.01" name="smoothness_se" required>
+
+                <label for="compactness_se">Compactness SE</label>
+                <input type="number" step="0.01" name="compactness_se" required>
+
+                <label for="concavity_se">Concavity SE</label>
+                <input type="number" step="0.01" name="concavity_se" required>
+
+                <label for="concave_points_se">Concave Points SE</label>
+                <input type="number" step="0.01" name="concave_points_se" required>
+            </div>
+
+            <!-- Fourth card with remaining 6 fields -->
+            <div class="card">
+                <div class="card-title">Worst Values</div>
+                <label for="symmetry_se">Symmetry SE</label>
+                <input type="number" step="0.01" name="symmetry_se" required>
+
+                <label for="fractal_dimension_se">Fractal Dimension SE</label>
+                <input type="number" step="0.01" name="fractal_dimension_se" required>
+
+                <label for="radius_worst">Radius Worst</label>
+                <input type="number" step="0.01" name="radius_worst" required>
+
+                <label for="texture_worst">Texture Worst</label>
+                <input type="number" step="0.01" name="texture_worst" required>
+
+                <label for="perimeter_worst">Perimeter Worst</label>
+                <input type="number" step="0.01" name="perimeter_worst" required>
+
+                <label for="area_worst">Area Worst</label>
+                <input type="number" step="0.01" name="area_worst" required>
+            </div>
+
+            <!-- Fifth card with remaining fields -->
+            <div class="card">
+                <div class="card-title">Worst Values (Continued)</div>
+                <label for="smoothness_worst">Smoothness Worst</label>
+                <input type="number" step="0.01" name="smoothness_worst" required>
+
+                <label for="compactness_worst">Compactness Worst</label>
+                <input type="number" step="0.01" name="compactness_worst" required>
+
+                <label for="concavity_worst">Concavity Worst</label>
+                <input type="number" step="0.01" name="concavity_worst" required>
+
+                <label for="concave_points_worst">Concave Points Worst</label>
+                <input type="number" step="0.01" name="concave_points_worst" required>
+
+                <label for="symmetry_worst">Symmetry Worst</label>
+                <input type="number" step="0.01" name="symmetry_worst" required>
+
+                <label for="fractal_dimension_worst">Fractal Dimension Worst</label>
+                <input type="number" step="0.01" name="fractal_dimension_worst" required>
+            </div>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction %}
+        <div class="prediction">
+            <p>{{ prediction }}</p>
+        </div>
+        {% endif %}
+        <div class="footer">
+            <p>Powered by Nithilan</p>
+        </div>
+    </div>
+</body>
+</html>
